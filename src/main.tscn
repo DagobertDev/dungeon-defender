@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b08os5kdof1ga"]
 
-[ext_resource type="Texture2D" uid="uid://cpyn6dx7kuhbi" path="res://assets/enemy.png" id="1_1m047"]
-[ext_resource type="Script" path="res://Enemy.cs" id="1_d1o1t"]
+[ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
+[ext_resource type="PackedScene" uid="uid://d4l8t1mfemb3v" path="res://enemy.tscn" id="1_wbyrc"]
 
 [sub_resource type="Curve2D" id="Curve2D_yltfy"]
 _data = {
@@ -18,12 +18,12 @@ width = 50.0
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_yltfy")
 
-[node name="Enemy" type="PathFollow2D" parent="Path"]
-position = Vector2(-100, 200)
-rotates = false
-loop = false
-script = ExtResource("1_d1o1t")
-Speed = 100.0
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Path")]
+script = ExtResource("1_4wtf0")
+Enemy = ExtResource("1_wbyrc")
+Path = NodePath("../Path")
 
-[node name="Sprite" type="Sprite2D" parent="Path/Enemy"]
-texture = ExtResource("1_1m047")
+[node name="Timer" type="Timer" parent="Spawner"]
+autostart = true
+
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]
