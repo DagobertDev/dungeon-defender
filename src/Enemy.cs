@@ -5,8 +5,39 @@ namespace DungeonDefender;
 
 public partial class Enemy : PathFollow2D
 {
+	[Signal]
+	public delegate void HealthChangedEventHandler(int health);
+
+	private int _currentHealth;
+
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
-	public float Speed { get; set; }
+	public int Speed { get; set; }
+
+	[Export(PropertyHint.Range, "0, 1000, or_greater")]
+	public int MaximumHealth { get; set; }
+
+	private int CurrentHealth
+	{
+		get => _currentHealth;
+		set
+		{
+			_currentHealth = value;
+			EmitSignal(SignalName.HealthChanged, CurrentHealth);
+		}
+	}
+
+	public override void _Ready()
+	{
+		HealthChanged += health =>
+		{
+			if (health <= 0)
+			{
+				QueueFree();
+			}
+		};
+		AddToGroup(Groups.Enemy);
+		CurrentHealth = MaximumHealth;
+	}
 
 	public override void _Process(double delta)
 	{
@@ -16,5 +47,10 @@ public partial class Enemy : PathFollow2D
 		{
 			QueueFree();
 		}
+	}
+
+	public void ApplyDamage(int damage)
+	{
+		CurrentHealth -= damage;
 	}
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=5 format=3 uid="uid://b08os5kdof1ga"]
 
 [ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
 [ext_resource type="PackedScene" uid="uid://d4l8t1mfemb3v" path="res://enemy.tscn" id="1_wbyrc"]
+[ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="3_4hdq1"]
 
 [sub_resource type="Curve2D" id="Curve2D_yltfy"]
 _data = {
@@ -25,5 +26,8 @@ Path = NodePath("../Path")
 
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
+
+[node name="Tower" parent="." instance=ExtResource("3_4hdq1")]
+position = Vector2(109, 86)
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]
