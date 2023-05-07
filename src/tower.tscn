@@ -7,4 +7,5 @@
 texture = ExtResource("1_5vi26")
 script = ExtResource("2_e2bt6")
 Damage = 1
+Range = 300
 ReloadTime = 1

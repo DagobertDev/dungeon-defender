@@ -11,6 +11,9 @@ public partial class Tower : Sprite2D
 	public int Damage { get; set; }
 
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
+	public int Range { get; set; }
+
+	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int ReloadTime { get; set; }
 
 	public override void _Ready()
@@ -22,7 +25,7 @@ public partial class Tower : Sprite2D
 
 	public override void _Process(double delta)
 	{
-		var enemy = GetTree().GetNodesInGroup(Groups.Enemy).Cast<Enemy>().FirstOrDefault();
+		var enemy = GetTree().GetNodesInGroup(Groups.Enemy).Cast<Enemy>().FirstOrDefault(InRange);
 
 		if (enemy is null)
 		{
@@ -42,5 +45,10 @@ public partial class Tower : Sprite2D
 	private void Disable()
 	{
 		SetProcess(false);
+	}
+
+	private bool InRange(Enemy enemy)
+	{
+		return enemy.GlobalPosition.DistanceSquaredTo(GlobalPosition) < Range * Range;
 	}
 }
