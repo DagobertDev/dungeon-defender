@@ -9,6 +9,7 @@ public partial class Player : Node
 	public override void _Ready()
 	{
 		Health = GetNode<HealthComponent>("Health");
+		Health.ZeroHealthReached += GameOver;
 	}
 
 	public void OnPossibleEnemyReached(Area2D area)
@@ -22,5 +23,10 @@ public partial class Player : Node
 
 		Health.ApplyDamage(1);
 		enemy.QueueFree();
+	}
+
+	private void GameOver()
+	{
+		GetTree().Paused = true;
 	}
 }
