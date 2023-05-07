@@ -5,15 +5,15 @@ namespace DungeonDefender;
 public partial class HPBar : ProgressBar
 {
 	[Export]
-	public Enemy Parent;
+	public HealthComponent HealthComponent;
 
 	public override void _Ready()
 	{
-		MaxValue = Parent.MaximumHealth;
-		Parent.HealthChanged += OnParentHealthChanged;
+		MaxValue = HealthComponent.MaximumHealth;
+		HealthComponent.CurrentHealthChanged += OnCurrentHealthChanged;
 	}
 
-	private void OnParentHealthChanged(int health)
+	private void OnCurrentHealthChanged(int health)
 	{
 		Value = health;
 	}

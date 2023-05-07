@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4l8t1mfemb3v"]
+[gd_scene load_steps=6 format=3 uid="uid://d4l8t1mfemb3v"]
 
 [ext_resource type="Script" path="res://Enemy.cs" id="1_bw3w5"]
 [ext_resource type="Texture2D" uid="uid://cpyn6dx7kuhbi" path="res://assets/enemy.png" id="2_ras6k"]
 [ext_resource type="Script" path="res://HPBar.cs" id="3_ja7ok"]
+[ext_resource type="Script" path="res://HealthComponent.cs" id="4_damp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy2q"]
+size = Vector2(40, 80)
 
 [node name="Enemy" type="PathFollow2D"]
 rotates = false
 loop = false
 script = ExtResource("1_bw3w5")
 Speed = 100
-MaximumHealth = 10
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ras6k")
 
-[node name="HPBar" type="ProgressBar" parent="." node_paths=PackedStringArray("Parent")]
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_damp3")
+MaximumHealth = 10
+
+[node name="HPBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
 self_modulate = Color(1, 0, 0, 1)
 offset_left = -20.0
 offset_top = 40.0
@@ -23,4 +30,9 @@ offset_bottom = 52.0
 value = 100.0
 show_percentage = false
 script = ExtResource("3_ja7ok")
-Parent = NodePath("..")
+HealthComponent = NodePath("../Health")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_vvy2q")

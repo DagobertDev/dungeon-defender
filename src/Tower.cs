@@ -32,7 +32,7 @@ public partial class Tower : Sprite2D
 			return;
 		}
 
-		enemy.ApplyDamage(Damage);
+		enemy.Health.ApplyDamage(Damage);
 		_reloadTimer.Start(ReloadTime);
 		Disable();
 	}
