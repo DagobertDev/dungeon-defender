@@ -8,11 +8,11 @@ public partial class Spawner : Node
 	public PackedScene Enemy { get; set; }
 
 	[Export]
-	public Node Path { get; set; }
+	public Lane Lane { get; set; }
 
 	public void SpawnEnemy()
 	{
-		var enemy = Enemy.Instantiate();
-		Path.AddChild(enemy);
+		var enemy = Enemy.Instantiate<Enemy>();
+		Lane.AddEnemy(enemy);
 	}
 }

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c04ewee4t58mh"]
+
+[ext_resource type="Script" path="res://Lane.cs" id="1_gdrje"]
+
+[sub_resource type="Curve2D" id="Curve2D_wjck6"]
+
+[node name="Lane" type="Line2D" node_paths=PackedStringArray("Path")]
+width = 50.0
+script = ExtResource("1_gdrje")
+Path = NodePath("Path")
+
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_wjck6")

@@ -6,15 +6,10 @@
 [ext_resource type="Script" path="res://HealthComponent.cs" id="2_1fsck"]
 [ext_resource type="Script" path="res://HPBar.cs" id="2_lq2dj"]
 [ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="3_4hdq1"]
+[ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="4_ivwgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4l2"]
 size = Vector2(20, 60)
-
-[sub_resource type="Curve2D" id="Curve2D_yltfy"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -100, 200, 0, 0, 0, 0, 1252, 200)
-}
-point_count = 2
 
 [node name="Main" type="Node"]
 
@@ -43,17 +38,13 @@ HealthComponent = NodePath("../Health")
 script = ExtResource("2_1fsck")
 MaximumHealth = 10
 
-[node name="Line" type="Line2D" parent="."]
+[node name="Lane" parent="." instance=ExtResource("4_ivwgu")]
 points = PackedVector2Array(-100, 200, 1252, 200)
-width = 50.0
 
-[node name="Path" type="Path2D" parent="."]
-curve = SubResource("Curve2D_yltfy")
-
-[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Path")]
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Lane")]
 script = ExtResource("1_4wtf0")
 Enemy = ExtResource("1_wbyrc")
-Path = NodePath("../Path")
+Lane = NodePath("../Lane")
 
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
