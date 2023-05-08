@@ -10,6 +10,10 @@
 
 [node name="Main" type="Node"]
 
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0, 0.623529, 0, 1)
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
+
 [node name="Player" type="Node" parent="."]
 script = ExtResource("1_lomeo")
 
