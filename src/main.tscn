@@ -39,7 +39,7 @@ script = ExtResource("2_1fsck")
 MaximumHealth = 10
 
 [node name="Lane" parent="." instance=ExtResource("4_ivwgu")]
-points = PackedVector2Array(-100, 200, 1252, 200)
+points = PackedVector2Array(-46, 605, 242, 283, 430, 268, 536, 456, 919, 440, 995, 269, 1252, 200)
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Lane")]
 script = ExtResource("1_4wtf0")
@@ -50,7 +50,7 @@ Lane = NodePath("../Lane")
 autostart = true
 
 [node name="Tower" parent="." instance=ExtResource("3_4hdq1")]
-position = Vector2(109, 86)
+position = Vector2(133, 178)
 
 [connection signal="area_entered" from="Player/Area" to="Player" method="OnPossibleEnemyReached"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]
