@@ -16,6 +16,9 @@ public partial class Tower : Sprite2D
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int ReloadTime { get; set; }
 
+	[Export]
+	public PackedScene Projectile { get; set; }
+
 	public override void _Ready()
 	{
 		_reloadTimer = new Timer { OneShot = true };
@@ -32,7 +35,9 @@ public partial class Tower : Sprite2D
 			return;
 		}
 
-		enemy.Health.ApplyDamage(Damage);
+		var projectile = Projectile.Instantiate<Projectile>();
+		AddChild(projectile);
+		projectile.FireAt(enemy, Damage);
 		_reloadTimer.Start(ReloadTime);
 		Disable();
 	}

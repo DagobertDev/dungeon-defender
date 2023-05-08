@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cod1nbqry7u4e"]
+[gd_scene load_steps=4 format=3 uid="uid://cod1nbqry7u4e"]
 
 [ext_resource type="Texture2D" uid="uid://b1krvuouy0xu5" path="res://assets/tower.png" id="1_5vi26"]
 [ext_resource type="Script" path="res://Tower.cs" id="2_e2bt6"]
+[ext_resource type="PackedScene" uid="uid://fgsi3j5sb4ts" path="res://projectile.tscn" id="3_bfbte"]
 
 [node name="Tower" type="Sprite2D"]
 texture = ExtResource("1_5vi26")
@@ -9,3 +10,4 @@ script = ExtResource("2_e2bt6")
 Damage = 1
 Range = 300
 ReloadTime = 1
+Projectile = ExtResource("3_bfbte")
