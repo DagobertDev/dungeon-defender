@@ -12,15 +12,8 @@ public partial class Player : Node
 		Health.ZeroHealthReached += GameOver;
 	}
 
-	public void OnPossibleEnemyReached(Area2D area)
+	public void OnEnemyCollision(Enemy enemy)
 	{
-		var enemy = area.GetParent();
-
-		if (!enemy.IsInGroup(Groups.Enemy))
-		{
-			return;
-		}
-
 		Health.ApplyDamage(1);
 		enemy.QueueFree();
 	}

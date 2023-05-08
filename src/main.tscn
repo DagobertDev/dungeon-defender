@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=8 format=3 uid="uid://b08os5kdof1ga"]
 
 [ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
 [ext_resource type="Script" path="res://Player.cs" id="1_lomeo"]
@@ -8,19 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="3_4hdq1"]
 [ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="4_ivwgu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs4l2"]
-size = Vector2(20, 60)
-
 [node name="Main" type="Node"]
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("1_lomeo")
-
-[node name="Area" type="Area2D" parent="Player"]
-
-[node name="CollisionShape" type="CollisionShape2D" parent="Player/Area"]
-position = Vector2(1240, 200)
-shape = SubResource("RectangleShape2D_cs4l2")
 
 [node name="HPBar" type="ProgressBar" parent="Player" node_paths=PackedStringArray("HealthComponent")]
 self_modulate = Color(1, 0, 0, 1)
@@ -52,5 +43,5 @@ autostart = true
 [node name="Tower" parent="." instance=ExtResource("3_4hdq1")]
 position = Vector2(133, 178)
 
-[connection signal="area_entered" from="Player/Area" to="Player" method="OnPossibleEnemyReached"]
+[connection signal="EnemyReachedEnd" from="Lane" to="Player" method="OnEnemyCollision"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]

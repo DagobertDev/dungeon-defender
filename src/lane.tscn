@@ -1,13 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://c04ewee4t58mh"]
+[gd_scene load_steps=4 format=3 uid="uid://c04ewee4t58mh"]
 
 [ext_resource type="Script" path="res://Lane.cs" id="1_gdrje"]
 
 [sub_resource type="Curve2D" id="Curve2D_wjck6"]
 
-[node name="Lane" type="Line2D" node_paths=PackedStringArray("Path")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_770al"]
+
+[node name="Lane" type="Line2D" node_paths=PackedStringArray("Path", "EndArea")]
 width = 50.0
 script = ExtResource("1_gdrje")
 Path = NodePath("Path")
+EndArea = NodePath("EndArea")
 
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_wjck6")
+
+[node name="EndArea" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="EndArea"]
+shape = SubResource("RectangleShape2D_770al")
+
+[connection signal="area_entered" from="EndArea" to="." method="OnObjectReachedEnd"]
