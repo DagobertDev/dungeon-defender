@@ -5,27 +5,33 @@ namespace DungeonDefender;
 public partial class Projectile : Node2D
 {
 	private int _damage;
-	private Enemy _enemy;
+	private Enemy _target;
 
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int Speed { get; set; }
 
 	public override void _Process(double delta)
 	{
-		GlobalPosition = GlobalPosition.MoveToward(_enemy.GlobalPosition, Speed * (float)delta);
+		GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, Speed * (float)delta);
 
-		if (GlobalPosition.DistanceSquaredTo(_enemy.GlobalPosition) > 10)
+		if (GlobalPosition.DistanceSquaredTo(_target.GlobalPosition) > 10)
 		{
 			return;
 		}
 
-		_enemy.Health.ApplyDamage(_damage);
+		_target.Health.ApplyDamage(_damage);
 		QueueFree();
 	}
 
-	public void FireAt(Enemy enemy, int damage)
+	public void FireAt(Enemy target, int damage)
 	{
-		_enemy = enemy;
+		_target = target;
 		_damage = damage;
+		_target.TreeExiting += OnTargetLost;
+	}
+
+	private void OnTargetLost()
+	{
+		QueueFree();
 	}
 }
