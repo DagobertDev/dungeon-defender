@@ -8,5 +8,6 @@ script = ExtResource("1_6f6cm")
 Speed = 300
 
 [node name="Sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_k01ix")

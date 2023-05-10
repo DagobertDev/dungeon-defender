@@ -16,6 +16,7 @@ public partial class Projectile : Node2D
 
 		if (GlobalPosition.DistanceSquaredTo(_target.GlobalPosition) > 10)
 		{
+			Rotation = GlobalPosition.AngleToPoint(_target.GlobalPosition);
 			return;
 		}
 
