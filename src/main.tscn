@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=13 format=3 uid="uid://b08os5kdof1ga"]
 
+[ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_1y0k3"]
 [ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
 [ext_resource type="Script" path="res://Player.cs" id="1_lomeo"]
 [ext_resource type="PackedScene" uid="uid://d4l8t1mfemb3v" path="res://enemy.tscn" id="1_wbyrc"]
@@ -7,6 +8,7 @@
 [ext_resource type="Script" path="res://HPBar.cs" id="2_lq2dj"]
 [ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="3_4hdq1"]
 [ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="4_ivwgu"]
+[ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="5_pcd2d"]
 [ext_resource type="Script" path="res://TowerBuilder.cs" id="7_7rcae"]
 [ext_resource type="Script" path="res://PlaceTowerButton.cs" id="8_7jx50"]
 [ext_resource type="Texture2D" uid="uid://b1krvuouy0xu5" path="res://assets/tower.png" id="10_j0fio"]
@@ -14,7 +16,9 @@
 [node name="Main" type="Node"]
 
 [node name="Background" type="Polygon2D" parent="."]
+texture_repeat = 2
 color = Color(0, 0.623529, 0, 1)
+texture = ExtResource("1_1y0k3")
 polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 
 [node name="Player" type="Node" parent="."]
@@ -37,7 +41,12 @@ script = ExtResource("2_1fsck")
 MaximumHealth = 10
 
 [node name="Lane" parent="." instance=ExtResource("4_ivwgu")]
+texture_repeat = 2
 points = PackedVector2Array(-46, 605, 242, 283, 430, 268, 536, 456, 919, 440, 995, 269, 1252, 200)
+width = 100.0
+texture = ExtResource("5_pcd2d")
+texture_mode = 1
+joint_mode = 2
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Lane")]
 script = ExtResource("1_4wtf0")
