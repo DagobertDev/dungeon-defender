@@ -9,6 +9,7 @@ public partial class HPBar : ProgressBar
 
 	public override void _Ready()
 	{
+		Require.NotNull(HealthComponent);
 		MaxValue = HealthComponent.MaximumHealth;
 		HealthComponent.CurrentHealthChanged += OnCurrentHealthChanged;
 	}

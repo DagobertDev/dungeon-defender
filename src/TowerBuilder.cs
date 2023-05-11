@@ -14,6 +14,8 @@ public partial class TowerBuilder : Area2D
 
 	public override void _Ready()
 	{
+		Require.NotNull(TowerParent);
+		Require.NotNull(Sprite);
 		SetEnabled(false);
 	}
 

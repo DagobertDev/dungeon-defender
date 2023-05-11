@@ -32,6 +32,7 @@ public partial class HealthComponent : Node
 
 	public override void _Ready()
 	{
+		Require.MoreThanZero(MaximumHealth);
 		CurrentHealth = MaximumHealth;
 	}
 

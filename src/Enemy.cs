@@ -11,6 +11,7 @@ public partial class Enemy : PathFollow2D
 
 	public override void _Ready()
 	{
+		Require.MoreThanZero(Speed);
 		Health = GetNode<HealthComponent>("Health");
 		Health.ZeroHealthReached += QueueFree;
 		AddToGroup(Groups.Enemy);

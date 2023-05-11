@@ -10,6 +10,12 @@ public partial class Projectile : Node2D
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int Speed { get; set; }
 
+	public override void _Ready()
+	{
+		Require.MoreThanZero(Speed);
+		Require.NotNull(_target);
+	}
+
 	public override void _Process(double delta)
 	{
 		GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, Speed * (float)delta);

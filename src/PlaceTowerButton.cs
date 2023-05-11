@@ -13,6 +13,13 @@ public partial class PlaceTowerButton : BaseButton
 	[Export]
 	public TowerBuilder TowerBuilder { get; set; }
 
+	public override void _Ready()
+	{
+		Require.NotNull(Tower);
+		Require.NotNull(Ghost);
+		Require.NotNull(TowerBuilder);
+	}
+
 	public override void _Pressed()
 	{
 		TowerBuilder.StartBuildMode(Tower, Ghost);

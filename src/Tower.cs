@@ -21,6 +21,10 @@ public partial class Tower : Sprite2D
 
 	public override void _Ready()
 	{
+		Require.MoreThanZero(Damage);
+		Require.MoreThanZero(Range);
+		Require.MoreThanZero(ReloadTime);
+		Require.NotNull(Projectile);
 		_reloadTimer = new Timer { OneShot = true };
 		AddChild(_reloadTimer);
 		_reloadTimer.Timeout += Enable;
@@ -36,8 +40,8 @@ public partial class Tower : Sprite2D
 		}
 
 		var projectile = Projectile.Instantiate<Projectile>();
-		AddChild(projectile);
 		projectile.FireAt(enemy, Damage);
+		AddChild(projectile);
 		_reloadTimer.Start(ReloadTime);
 		Disable();
 	}

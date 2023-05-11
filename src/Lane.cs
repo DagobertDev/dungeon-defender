@@ -18,6 +18,10 @@ public partial class Lane : Line2D
 
 	public override void _Ready()
 	{
+		Require.NotNull(Path);
+		Require.NotNull(EndArea);
+		Require.NotNull(Area);
+
 		for (var i = 0; i < Points.Length - 1; i++)
 		{
 			var point = Points[i];
