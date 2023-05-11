@@ -5,7 +5,7 @@ namespace DungeonDefender;
 public partial class Enemy : PathFollow2D
 {
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
-	public int Speed { get; set; }
+	public int Speed { get; private set; }
 
 	public HealthComponent Health { get; private set; }
 

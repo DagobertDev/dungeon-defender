@@ -8,7 +8,7 @@ public partial class Projectile : Node2D
 	private Enemy _target;
 
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
-	public int Speed { get; set; }
+	public int Speed { get; private set; }
 
 	public override void _Ready()
 	{

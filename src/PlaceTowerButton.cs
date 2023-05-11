@@ -5,13 +5,13 @@ namespace DungeonDefender;
 public partial class PlaceTowerButton : BaseButton
 {
 	[Export]
-	public PackedScene Tower { get; set; }
+	public PackedScene Tower { get; private set; }
 
 	[Export]
-	public Texture2D Ghost { get; set; }
+	public Texture2D Ghost { get; private set; }
 
 	[Export]
-	public TowerBuilder TowerBuilder { get; set; }
+	public TowerBuilder TowerBuilder { get; private set; }
 
 	public override void _Ready()
 	{

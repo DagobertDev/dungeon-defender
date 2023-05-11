@@ -5,7 +5,7 @@ namespace DungeonDefender;
 public partial class HPBar : ProgressBar
 {
 	[Export]
-	public HealthComponent HealthComponent;
+	public HealthComponent HealthComponent { get; private set; }
 
 	public override void _Ready()
 	{

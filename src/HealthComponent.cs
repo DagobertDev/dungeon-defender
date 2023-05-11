@@ -13,7 +13,7 @@ public partial class HealthComponent : Node
 	private int _currentHealth;
 
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
-	public int MaximumHealth { get; set; }
+	public int MaximumHealth { get; private set; }
 
 	private int CurrentHealth
 	{

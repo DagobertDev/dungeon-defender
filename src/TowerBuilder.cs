@@ -7,10 +7,10 @@ public partial class TowerBuilder : Area2D
 	private PackedScene _towerScene;
 
 	[Export]
-	public Node TowerParent { get; set; }
+	public Node TowerParent { get; private set; }
 
 	[Export]
-	public Sprite2D Sprite { get; set; }
+	public Sprite2D Sprite { get; private set; }
 
 	public override void _Ready()
 	{

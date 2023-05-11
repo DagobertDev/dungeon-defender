@@ -5,10 +5,10 @@ namespace DungeonDefender;
 public partial class Spawner : Node
 {
 	[Export]
-	public PackedScene Enemy { get; set; }
+	public PackedScene Enemy { get; private set; }
 
 	[Export]
-	public Lane Lane { get; set; }
+	public Lane Lane { get; private set; }
 
 	public override void _Ready()
 	{

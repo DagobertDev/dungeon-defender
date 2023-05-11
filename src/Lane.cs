@@ -8,13 +8,13 @@ public partial class Lane : Line2D
 	public delegate void EnemyReachedEndEventHandler(Enemy enemy);
 
 	[Export]
-	public Path2D Path { get; set; }
+	public Path2D Path { get; private set; }
 
 	[Export]
-	public Area2D EndArea { get; set; }
+	public Area2D EndArea { get; private set; }
 
 	[Export]
-	public Area2D Area { get; set; }
+	public Area2D Area { get; private set; }
 
 	public override void _Ready()
 	{
