@@ -13,14 +13,31 @@ public partial class Lane : Line2D
 	[Export]
 	public Area2D EndArea { get; set; }
 
+	[Export]
+	public Area2D Area { get; set; }
+
 	public override void _Ready()
 	{
-		foreach (var point in Points)
+		for (var i = 0; i < Points.Length - 1; i++)
 		{
+			var point = Points[i];
+			var nextPoint = Points[i + 1];
+
 			Path.Curve.AddPoint(point);
+
+			var newShape = new CollisionShape2D();
+			Area.AddChild(newShape);
+			var rect = new RectangleShape2D();
+			newShape.Position = (point + nextPoint) / 2;
+			newShape.Rotation = point.AngleToPoint(nextPoint);
+			var length = point.DistanceTo(nextPoint);
+			rect.Size = new Vector2(length, Width);
+			newShape.Shape = rect;
 		}
 
-		EndArea.Position = Points[^1];
+		var lastPoint = Points[^1];
+		Path.Curve.AddPoint(lastPoint);
+		EndArea.Position = lastPoint;
 	}
 
 	public void AddEnemy(Enemy enemy)

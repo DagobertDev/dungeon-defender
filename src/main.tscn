@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=14 format=3 uid="uid://b08os5kdof1ga"]
 
 [ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_1y0k3"]
 [ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://TowerBuilder.cs" id="7_7rcae"]
 [ext_resource type="Script" path="res://PlaceTowerButton.cs" id="8_7jx50"]
 [ext_resource type="Texture2D" uid="uid://b1krvuouy0xu5" path="res://assets/tower.png" id="10_j0fio"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ood13"]
+radius = 50.0
 
 [node name="Main" type="Node"]
 
@@ -56,10 +59,16 @@ Lane = NodePath("../Lane")
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
 
-[node name="TowerBuilder" type="Sprite2D" parent="." node_paths=PackedStringArray("TowerParent")]
+[node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite")]
 self_modulate = Color(1, 1, 1, 0.498039)
 script = ExtResource("7_7rcae")
 TowerParent = NodePath("..")
+Sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="TowerBuilder"]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="TowerBuilder"]
+shape = SubResource("CircleShape2D_ood13")
 
 [node name="Buildings" type="VBoxContainer" parent="."]
 anchors_preset = 6

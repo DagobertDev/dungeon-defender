@@ -6,11 +6,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_770al"]
 
-[node name="Lane" type="Line2D" node_paths=PackedStringArray("Path", "EndArea")]
+[node name="Lane" type="Line2D" node_paths=PackedStringArray("Path", "EndArea", "Area")]
+points = PackedVector2Array(-20, -38)
 width = 50.0
 script = ExtResource("1_gdrje")
 Path = NodePath("Path")
 EndArea = NodePath("EndArea")
+Area = NodePath("Area")
 
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_wjck6")
@@ -19,5 +21,7 @@ curve = SubResource("Curve2D_wjck6")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="EndArea"]
 shape = SubResource("RectangleShape2D_770al")
+
+[node name="Area" type="Area2D" parent="."]
 
 [connection signal="area_entered" from="EndArea" to="." method="OnObjectReachedEnd"]
