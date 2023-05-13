@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=13 format=3 uid="uid://b08os5kdof1ga"]
 
 [ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_1y0k3"]
 [ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="5_pcd2d"]
 [ext_resource type="Script" path="res://TowerBuilder.cs" id="7_7rcae"]
 [ext_resource type="Script" path="res://PlaceTowerButton.cs" id="8_7jx50"]
-[ext_resource type="Texture2D" uid="uid://610c3utu6v1u" path="res://assets/green_character.png" id="12_4gsu5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ood13"]
 radius = 50.0
@@ -88,7 +87,6 @@ layout_mode = 2
 text = "Tower"
 script = ExtResource("8_7jx50")
 Tower = ExtResource("3_4hdq1")
-Ghost = ExtResource("12_4gsu5")
 TowerBuilder = NodePath("../../TowerBuilder")
 
 [connection signal="EnemyReachedEnd" from="Lane" to="Player" method="OnEnemyCollision"]

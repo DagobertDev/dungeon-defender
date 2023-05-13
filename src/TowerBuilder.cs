@@ -19,9 +19,12 @@ public partial class TowerBuilder : Area2D
 		SetEnabled(false);
 	}
 
-	public void StartBuildMode(PackedScene towerScene, Texture2D ghostTexture)
+	public void StartBuildMode(PackedScene towerScene)
 	{
-		Sprite.Texture = ghostTexture;
+		var ghost = towerScene.Instantiate<Tower>();
+		Sprite.Texture = ghost.Texture;
+		Sprite.Transform = ghost.Transform;
+		ghost.QueueFree();
 		_towerScene = towerScene;
 		SetEnabled(true);
 	}
