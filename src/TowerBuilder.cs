@@ -44,7 +44,7 @@ public partial class TowerBuilder : Area2D
 		}
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
 		GlobalPosition = GetGlobalMousePosition();
 		Modulate = CanBuild() ? Colors.White : Colors.Red;
@@ -52,7 +52,7 @@ public partial class TowerBuilder : Area2D
 
 	private void SetEnabled(bool enabled)
 	{
-		SetPhysicsProcess(enabled);
+		SetProcess(enabled);
 		SetProcessUnhandledInput(enabled);
 
 		if (!enabled)
