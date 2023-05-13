@@ -36,7 +36,10 @@ public partial class TowerBuilder : Area2D
 			var tower = _towerScene.Instantiate<Tower>();
 			tower.GlobalPosition = GlobalPosition;
 			TowerParent.AddChild(tower);
-			Sprite.Texture = null;
+			SetEnabled(false);
+		}
+		else if (@event.IsActionPressed(InputAction.MouseclickRight))
+		{
 			SetEnabled(false);
 		}
 	}
@@ -44,14 +47,18 @@ public partial class TowerBuilder : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 		GlobalPosition = GetGlobalMousePosition();
-
 		Modulate = CanBuild() ? Colors.White : Colors.Red;
 	}
 
 	private void SetEnabled(bool enabled)
 	{
-		SetProcess(enabled);
+		SetPhysicsProcess(enabled);
 		SetProcessUnhandledInput(enabled);
+
+		if (!enabled)
+		{
+			Sprite.Texture = null;
+		}
 	}
 
 	private bool CanBuild()
