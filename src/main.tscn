@@ -58,11 +58,12 @@ Lane = NodePath("../Lane")
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
 
-[node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite")]
+[node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite", "CollisionShape")]
 self_modulate = Color(1, 1, 1, 0.498039)
 script = ExtResource("7_7rcae")
 TowerParent = NodePath("..")
 Sprite = NodePath("Sprite")
+CollisionShape = NodePath("CollisionShape")
 
 [node name="Sprite" type="Sprite2D" parent="TowerBuilder"]
 

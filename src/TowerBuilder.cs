@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace DungeonDefender;
@@ -12,20 +13,26 @@ public partial class TowerBuilder : Area2D
 	[Export]
 	public Sprite2D Sprite { get; private set; }
 
+	[Export]
+	public CollisionShape2D CollisionShape { get; private set; }
+
 	public override void _Ready()
 	{
 		Require.NotNull(TowerParent);
 		Require.NotNull(Sprite);
+		Require.NotNull(CollisionShape);
 		SetEnabled(false);
 	}
 
 	public void StartBuildMode(PackedScene towerScene)
 	{
+		_towerScene = towerScene;
 		var ghost = towerScene.Instantiate<Tower>();
 		Sprite.Texture = ghost.Texture;
 		Sprite.Transform = ghost.Transform;
+		var ghostShape = ghost.CollisionBody.GetChildren().Cast<CollisionShape2D>().Single().Shape;
+		CollisionShape.Shape = ghostShape;
 		ghost.QueueFree();
-		_towerScene = towerScene;
 		SetEnabled(true);
 	}
 

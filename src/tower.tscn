@@ -9,13 +9,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_isw4h"]
 radius = 50.0
 
-[node name="Tower" type="Sprite2D"]
+[node name="Tower" type="Sprite2D" node_paths=PackedStringArray("CollisionBody")]
 texture = ExtResource("1_bphdy")
 script = ExtResource("2_e2bt6")
 Damage = 1
 Range = 300
 ReloadTime = 1
 Projectile = ExtResource("3_bfbte")
+CollisionBody = NodePath("Area")
 
 [node name="Area" type="Area2D" parent="."]
 

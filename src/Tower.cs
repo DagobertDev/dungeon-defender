@@ -17,7 +17,10 @@ public partial class Tower : Sprite2D
 	public int ReloadTime { get; set; }
 
 	[Export]
-	public PackedScene Projectile { get; set; }
+	public PackedScene Projectile { get; private set; }
+
+	[Export]
+	public CollisionObject2D CollisionBody { get; private set; }
 
 	public override void _Ready()
 	{
@@ -25,6 +28,7 @@ public partial class Tower : Sprite2D
 		Require.MoreThanZero(Range);
 		Require.MoreThanZero(ReloadTime);
 		Require.NotNull(Projectile);
+		Require.NotNull(CollisionBody);
 		_reloadTimer = new Timer { OneShot = true };
 		AddChild(_reloadTimer);
 		_reloadTimer.Timeout += Enable;
