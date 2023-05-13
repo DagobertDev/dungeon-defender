@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bavcixnkrauf2"]
+
+[ext_resource type="Script" path="res://StartMenu.cs" id="1_wu7lv"]
+[ext_resource type="PackedScene" uid="uid://c0yt1a2o3qqsg" path="res://game.tscn" id="2_0oc4y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_or4i5"]
+font_size = 32
+
+[node name="StartMenu" type="Node"]
+script = ExtResource("1_wu7lv")
+LevelScene = ExtResource("2_0oc4y")
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -59.0
+offset_right = 145.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameNameLabel" type="Label" parent="Container"]
+layout_mode = 2
+text = "Dungeon Defender"
+label_settings = SubResource("LabelSettings_or4i5")
+
+[node name="Container" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Container/Container"]
+layout_mode = 2
+text = "Start"
+
+[node name="ExitButton" type="Button" parent="Container/Container"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Container/Container/StartButton" to="." method="StartGame"]
+[connection signal="pressed" from="Container/Container/ExitButton" to="." method="ExitGame"]
