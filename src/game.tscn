@@ -1,30 +1,31 @@
-[gd_scene load_steps=13 format=3 uid="uid://b08os5kdof1ga"]
+[gd_scene load_steps=14 format=3 uid="uid://c0yt1a2o3qqsg"]
 
-[ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_1y0k3"]
-[ext_resource type="Script" path="res://Spawner.cs" id="1_4wtf0"]
-[ext_resource type="Script" path="res://Player.cs" id="1_lomeo"]
-[ext_resource type="PackedScene" uid="uid://d4l8t1mfemb3v" path="res://enemy.tscn" id="1_wbyrc"]
-[ext_resource type="Script" path="res://HealthComponent.cs" id="2_1fsck"]
-[ext_resource type="Script" path="res://HPBar.cs" id="2_lq2dj"]
-[ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="3_4hdq1"]
-[ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="4_ivwgu"]
-[ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="5_pcd2d"]
-[ext_resource type="Script" path="res://TowerBuilder.cs" id="7_7rcae"]
-[ext_resource type="Script" path="res://PlaceTowerButton.cs" id="8_7jx50"]
+[ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_ausab"]
+[ext_resource type="Script" path="res://Player.cs" id="2_qhyf7"]
+[ext_resource type="Script" path="res://HPBar.cs" id="3_n7ku1"]
+[ext_resource type="Script" path="res://HealthComponent.cs" id="4_calbv"]
+[ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="5_pjj03"]
+[ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="6_yt838"]
+[ext_resource type="Script" path="res://Spawner.cs" id="7_xwqo3"]
+[ext_resource type="PackedScene" uid="uid://d4l8t1mfemb3v" path="res://enemy.tscn" id="8_rfgsp"]
+[ext_resource type="Script" path="res://TowerBuilder.cs" id="9_4u7pd"]
+[ext_resource type="Script" path="res://PlaceTowerButton.cs" id="10_00upp"]
+[ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="11_mms0e"]
+[ext_resource type="Script" path="res://InGameMenu.cs" id="12_1q77d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ood13"]
 radius = 50.0
 
-[node name="Main" type="Node"]
+[node name="Game" type="Node"]
 
 [node name="Background" type="Polygon2D" parent="."]
 texture_repeat = 2
 color = Color(0, 0.623529, 0, 1)
-texture = ExtResource("1_1y0k3")
+texture = ExtResource("1_ausab")
 polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 
 [node name="Player" type="Node" parent="."]
-script = ExtResource("1_lomeo")
+script = ExtResource("2_qhyf7")
 
 [node name="HPBar" type="ProgressBar" parent="Player" node_paths=PackedStringArray("HealthComponent")]
 self_modulate = Color(1, 0, 0, 1)
@@ -35,24 +36,24 @@ offset_left = -102.0
 offset_bottom = 37.0
 grow_horizontal = 0
 show_percentage = false
-script = ExtResource("2_lq2dj")
+script = ExtResource("3_n7ku1")
 HealthComponent = NodePath("../Health")
 
 [node name="Health" type="Node" parent="Player"]
-script = ExtResource("2_1fsck")
+script = ExtResource("4_calbv")
 MaximumHealth = 10
 
-[node name="Lane" parent="." instance=ExtResource("4_ivwgu")]
+[node name="Lane" parent="." instance=ExtResource("5_pjj03")]
 texture_repeat = 2
 points = PackedVector2Array(-46, 605, 242, 283, 430, 268, 536, 456, 919, 440, 995, 269, 1252, 200)
 width = 100.0
-texture = ExtResource("5_pcd2d")
+texture = ExtResource("6_yt838")
 texture_mode = 1
 joint_mode = 2
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("Lane")]
-script = ExtResource("1_4wtf0")
-Enemy = ExtResource("1_wbyrc")
+script = ExtResource("7_xwqo3")
+Enemy = ExtResource("8_rfgsp")
 Lane = NodePath("../Lane")
 
 [node name="Timer" type="Timer" parent="Spawner"]
@@ -60,7 +61,7 @@ autostart = true
 
 [node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite", "CollisionShape")]
 self_modulate = Color(1, 1, 1, 0.498039)
-script = ExtResource("7_7rcae")
+script = ExtResource("9_4u7pd")
 TowerParent = NodePath("..")
 Sprite = NodePath("Sprite")
 CollisionShape = NodePath("CollisionShape")
@@ -86,9 +87,59 @@ grow_vertical = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Tower"
-script = ExtResource("8_7jx50")
-Tower = ExtResource("3_4hdq1")
+script = ExtResource("10_00upp")
+Tower = ExtResource("11_mms0e")
 TowerBuilder = NodePath("../../TowerBuilder")
+
+[node name="InGameMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_1q77d")
+StartMenu = "res://start-menu.tscn"
+
+[node name="BackgroundOverlay" type="ColorRect" parent="InGameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.313726, 0.313726, 0.313726, 0.392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -33.0
+offset_right = 39.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueButton" type="Button" parent="InGameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="MainMenuButton" type="Button" parent="InGameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="ExitButton" type="Button" parent="InGameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
 
 [connection signal="EnemyReachedEnd" from="Lane" to="Player" method="OnEnemyCollision"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]
+[connection signal="pressed" from="InGameMenu/VBoxContainer/ContinueButton" to="InGameMenu" method="ContinueGame"]
+[connection signal="pressed" from="InGameMenu/VBoxContainer/MainMenuButton" to="InGameMenu" method="GoToStartMenu"]
+[connection signal="pressed" from="InGameMenu/VBoxContainer/ExitButton" to="InGameMenu" method="CloseGame"]
