@@ -23,13 +23,14 @@ Projectile = ExtResource("3_bfbte")
 shape = SubResource("CircleShape2D_isw4h")
 
 [node name="Bow" type="Sprite2D" parent="."]
-position = Vector2(2, -58)
+position = Vector2(58, 2)
+rotation = 1.5708
 texture = ExtResource("5_22bnv")
 
 [node name="LeftHand" type="Sprite2D" parent="."]
-position = Vector2(20, -23)
+position = Vector2(23, 20)
 texture = ExtResource("4_qjgco")
 
 [node name="RightHand" type="Sprite2D" parent="."]
-position = Vector2(-20, -60)
+position = Vector2(60, -20)
 texture = ExtResource("4_qjgco")
