@@ -15,9 +15,21 @@ run/main_scene="res://start-menu.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1440
+window/size/window_height_override=810
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="Dungeon Defender"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 

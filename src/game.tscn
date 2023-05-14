@@ -22,7 +22,7 @@ radius = 50.0
 texture_repeat = 2
 color = Color(0, 0.623529, 0, 1)
 texture = ExtResource("1_ausab")
-polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_qhyf7")
@@ -45,7 +45,7 @@ MaximumHealth = 10
 
 [node name="Lane" parent="." instance=ExtResource("5_pjj03")]
 texture_repeat = 2
-points = PackedVector2Array(-46, 605, 242, 283, 430, 268, 536, 456, 919, 440, 995, 269, 1252, 200)
+points = PackedVector2Array(-62, 863, 205, 539, 474, 498, 661, 763, 1063, 712, 1151, 364, 2015, 261)
 width = 100.0
 texture = ExtResource("6_yt838")
 texture_mode = 1
