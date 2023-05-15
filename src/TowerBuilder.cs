@@ -89,7 +89,7 @@ public partial class TowerBuilder : Area2D
 	{
 		var dummy = tower.Instantiate<Tower>();
 		dummy.QueueFree();
-		return dummy.Cost < GoldComponent.CurrentGold;
+		return dummy.Cost <= GoldComponent.CurrentGold;
 	}
 
 	private bool CanBuild()
