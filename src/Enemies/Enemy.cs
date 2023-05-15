@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DungeonDefender;
+namespace DungeonDefender.Enemies;
 
 public partial class Enemy : PathFollow2D
 {

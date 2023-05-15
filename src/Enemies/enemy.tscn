@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4l8t1mfemb3v"]
+[gd_scene load_steps=6 format=3 uid="uid://d03lnie42kths"]
 
-[ext_resource type="Script" path="res://Enemy.cs" id="1_bw3w5"]
-[ext_resource type="Texture2D" uid="uid://bb41quv2vt7ay" path="res://assets/red_character.png" id="2_avebd"]
-[ext_resource type="Script" path="res://HPBar.cs" id="3_ja7ok"]
-[ext_resource type="Script" path="res://HealthComponent.cs" id="4_damp3"]
+[ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_0tnwh"]
+[ext_resource type="Texture2D" uid="uid://bb41quv2vt7ay" path="res://assets/red_character.png" id="2_1hyvj"]
+[ext_resource type="Script" path="res://HealthComponent.cs" id="3_w8i3i"]
+[ext_resource type="Script" path="res://HPBar.cs" id="4_gc2u5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy2q"]
 size = Vector2(42, 43)
@@ -11,15 +11,15 @@ size = Vector2(42, 43)
 [node name="Enemy" type="PathFollow2D"]
 rotates = false
 loop = false
-script = ExtResource("1_bw3w5")
+script = ExtResource("1_0tnwh")
 Speed = 100
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_avebd")
+texture = ExtResource("2_1hyvj")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_damp3")
+script = ExtResource("3_w8i3i")
 MaximumHealth = 10
 
 [node name="HPBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
@@ -30,7 +30,7 @@ offset_right = 20.0
 offset_bottom = 35.0
 value = 100.0
 show_percentage = false
-script = ExtResource("3_ja7ok")
+script = ExtResource("4_gc2u5")
 HealthComponent = NodePath("../Health")
 
 [node name="Area" type="Area2D" parent="."]

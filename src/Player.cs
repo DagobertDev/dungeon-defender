@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using DungeonDefender.Enemies;
+using Godot;
 
 namespace DungeonDefender;
 
