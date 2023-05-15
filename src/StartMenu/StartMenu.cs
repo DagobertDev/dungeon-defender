@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace DungeonDefender;
+namespace DungeonDefender.StartMenu;
 
 public partial class StartMenu : Node
 {
