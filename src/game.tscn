@@ -26,8 +26,10 @@ color = Color(0, 0.623529, 0, 1)
 texture = ExtResource("1_ausab")
 polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 
-[node name="Player" type="Node" parent="."]
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("_health", "_lane")]
 script = ExtResource("2_qhyf7")
+_health = NodePath("Health")
+_lane = NodePath("../Lane")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Player"]
 anchors_preset = 1
@@ -159,7 +161,6 @@ text = "Main Menu"
 layout_mode = 2
 text = "Exit"
 
-[connection signal="EnemyReachedEnd" from="Lane" to="Player" method="OnEnemyCollision"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="SpawnEnemy"]
 [connection signal="pressed" from="InGameMenu/VBoxContainer/ContinueButton" to="InGameMenu" method="ContinueGame"]
 [connection signal="pressed" from="InGameMenu/VBoxContainer/MainMenuButton" to="InGameMenu" method="GoToStartMenu"]

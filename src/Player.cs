@@ -4,17 +4,23 @@ namespace DungeonDefender;
 
 public partial class Player : Node
 {
-	public HealthComponent Health { get; private set; }
+	[Export]
+	private HealthComponent _health;
+
+	[Export]
+	private Lane _lane;
 
 	public override void _Ready()
 	{
-		Health = GetNode<HealthComponent>("Health");
-		Health.ZeroHealthReached += GameOver;
+		Require.NotNull(_lane);
+		Require.NotNull(_health);
+		_lane.EnemyReachedEnd += OnEnemyCollision;
+		_health.ZeroHealthReached += GameOver;
 	}
 
 	public void OnEnemyCollision(Enemy enemy)
 	{
-		Health.ApplyDamage(1);
+		_health.ApplyDamage(1);
 		enemy.QueueFree();
 	}
 
