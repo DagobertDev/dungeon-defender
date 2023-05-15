@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace DungeonDefender;
+namespace DungeonDefender.Player;
 
 public partial class GoldComponent : Node
 {

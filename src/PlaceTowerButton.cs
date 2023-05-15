@@ -1,3 +1,4 @@
+using DungeonDefender.Player;
 using Godot;
 
 namespace DungeonDefender;

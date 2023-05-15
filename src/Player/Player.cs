@@ -1,7 +1,7 @@
 ﻿using DungeonDefender.Enemies;
 using Godot;
 
-namespace DungeonDefender;
+namespace DungeonDefender.Player;
 
 public partial class Player : Node
 {
