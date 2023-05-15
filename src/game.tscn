@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0yt1a2o3qqsg"]
+[gd_scene load_steps=16 format=3 uid="uid://c0yt1a2o3qqsg"]
 
 [ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_ausab"]
 [ext_resource type="Script" path="res://Player.cs" id="2_qhyf7"]
 [ext_resource type="Script" path="res://HPBar.cs" id="3_n7ku1"]
+[ext_resource type="Script" path="res://GoldLabel.cs" id="3_swgtg"]
 [ext_resource type="Script" path="res://HealthComponent.cs" id="4_calbv"]
 [ext_resource type="Script" path="res://GoldComponent.cs" id="5_jdwrf"]
 [ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="5_pjj03"]
@@ -28,17 +29,28 @@ polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_qhyf7")
 
-[node name="HPBar" type="ProgressBar" parent="Player" node_paths=PackedStringArray("HealthComponent")]
-self_modulate = Color(1, 0, 0, 1)
+[node name="HBoxContainer" type="HBoxContainer" parent="Player"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -102.0
-offset_bottom = 37.0
+offset_left = -53.0
+offset_bottom = 40.0
 grow_horizontal = 0
+
+[node name="GoldLabel" type="Label" parent="Player/HBoxContainer" node_paths=PackedStringArray("GoldComponent")]
+layout_mode = 2
+text = "Gold: 00000"
+script = ExtResource("3_swgtg")
+GoldComponent = NodePath("../../Gold")
+
+[node name="HPBar" type="ProgressBar" parent="Player/HBoxContainer" node_paths=PackedStringArray("HealthComponent")]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
 show_percentage = false
 script = ExtResource("3_n7ku1")
-HealthComponent = NodePath("../Health")
+HealthComponent = NodePath("../../Health")
 
 [node name="Health" type="Node" parent="Player"]
 script = ExtResource("4_calbv")
