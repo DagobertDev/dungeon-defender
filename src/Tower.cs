@@ -16,6 +16,9 @@ public partial class Tower : Sprite2D
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int ReloadTime { get; set; }
 
+	[Export(PropertyHint.Range, "0, 1000, or_greater")]
+	public int Cost { get; set; }
+
 	[Export]
 	public PackedScene Projectile { get; private set; }
 
@@ -29,6 +32,7 @@ public partial class Tower : Sprite2D
 		Require.MoreThanZero(ReloadTime);
 		Require.NotNull(Projectile);
 		Require.NotNull(CollisionBody);
+		Require.MoreThanZero(Cost);
 		_reloadTimer = new Timer { OneShot = true };
 		AddChild(_reloadTimer);
 		_reloadTimer.Timeout += Enable;

@@ -19,4 +19,13 @@ public static class Require
 			throw new ArgumentOutOfRangeException(parameterName);
 		}
 	}
+
+	public static void ZeroOrMore<T>(T argument,
+		[CallerArgumentExpression(nameof(argument))] string parameterName = null) where T : INumber<T>
+	{
+		if (argument < T.Zero)
+		{
+			throw new ArgumentOutOfRangeException(parameterName);
+		}
+	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 
@@ -16,11 +17,15 @@ public partial class TowerBuilder : Area2D
 	[Export]
 	public CollisionShape2D CollisionShape { get; private set; }
 
+	[Export]
+	private GoldComponent GoldComponent { get; set; }
+
 	public override void _Ready()
 	{
 		Require.NotNull(TowerParent);
 		Require.NotNull(Sprite);
 		Require.NotNull(CollisionShape);
+		Require.NotNull(GoldComponent);
 		SetEnabled(false);
 	}
 
@@ -40,9 +45,7 @@ public partial class TowerBuilder : Area2D
 	{
 		if (@event.IsActionPressed(InputAction.MouseclickLeft) && CanBuild())
 		{
-			var tower = _towerScene.Instantiate<Tower>();
-			tower.GlobalPosition = GlobalPosition;
-			TowerParent.AddChild(tower);
+			BuildTower();
 			SetEnabled(false);
 		}
 		else if (@event.IsActionPressed(InputAction.MouseclickRight))
@@ -66,6 +69,27 @@ public partial class TowerBuilder : Area2D
 		{
 			Sprite.Texture = null;
 		}
+	}
+
+	private void BuildTower()
+	{
+		var tower = _towerScene.Instantiate<Tower>();
+
+		if (GoldComponent.CurrentGold < tower.Cost)
+		{
+			throw new InvalidOperationException("Not enough gold to place tower.");
+		}
+
+		tower.GlobalPosition = GlobalPosition;
+		GoldComponent.CurrentGold -= tower.Cost;
+		TowerParent.AddChild(tower);
+	}
+
+	public bool CanBuildTower(PackedScene tower)
+	{
+		var dummy = tower.Instantiate<Tower>();
+		dummy.QueueFree();
+		return dummy.Cost < GoldComponent.CurrentGold;
 	}
 
 	private bool CanBuild()

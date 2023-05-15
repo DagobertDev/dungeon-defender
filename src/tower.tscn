@@ -15,6 +15,7 @@ script = ExtResource("2_e2bt6")
 Damage = 1
 Range = 300
 ReloadTime = 1
+Cost = 100
 Projectile = ExtResource("3_bfbte")
 CollisionBody = NodePath("Area")
 

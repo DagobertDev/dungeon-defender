@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0yt1a2o3qqsg"]
+[gd_scene load_steps=15 format=3 uid="uid://c0yt1a2o3qqsg"]
 
 [ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_ausab"]
 [ext_resource type="Script" path="res://Player.cs" id="2_qhyf7"]
 [ext_resource type="Script" path="res://HPBar.cs" id="3_n7ku1"]
 [ext_resource type="Script" path="res://HealthComponent.cs" id="4_calbv"]
+[ext_resource type="Script" path="res://GoldComponent.cs" id="5_jdwrf"]
 [ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="5_pjj03"]
 [ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="6_yt838"]
 [ext_resource type="Script" path="res://Spawner.cs" id="7_xwqo3"]
@@ -43,6 +44,10 @@ HealthComponent = NodePath("../Health")
 script = ExtResource("4_calbv")
 MaximumHealth = 10
 
+[node name="Gold" type="Node" parent="Player"]
+script = ExtResource("5_jdwrf")
+InitialGold = 1000
+
 [node name="Lane" parent="." instance=ExtResource("5_pjj03")]
 texture_repeat = 2
 points = PackedVector2Array(-62, 863, 205, 539, 474, 498, 661, 763, 1063, 712, 1151, 364, 2015, 261)
@@ -61,12 +66,13 @@ autostart = true
 
 [node name="Towers" type="Node" parent="."]
 
-[node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite", "CollisionShape")]
+[node name="TowerBuilder" type="Area2D" parent="." node_paths=PackedStringArray("TowerParent", "Sprite", "CollisionShape", "GoldComponent")]
 self_modulate = Color(1, 1, 1, 0.498039)
 script = ExtResource("9_4u7pd")
 TowerParent = NodePath("../Towers")
 Sprite = NodePath("Sprite")
 CollisionShape = NodePath("CollisionShape")
+GoldComponent = NodePath("../Player/Gold")
 
 [node name="Sprite" type="Sprite2D" parent="TowerBuilder"]
 
@@ -85,13 +91,14 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TowerButton" type="Button" parent="Buildings" node_paths=PackedStringArray("TowerBuilder")]
+[node name="TowerButton" type="Button" parent="Buildings" node_paths=PackedStringArray("TowerBuilder", "GoldComponent")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Tower"
 script = ExtResource("10_00upp")
 Tower = ExtResource("11_mms0e")
 TowerBuilder = NodePath("../../TowerBuilder")
+GoldComponent = NodePath("../../Player/Gold")
 
 [node name="InGameMenu" type="Control" parent="."]
 process_mode = 3
