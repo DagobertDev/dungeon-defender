@@ -13,6 +13,7 @@ rotates = false
 loop = false
 script = ExtResource("1_0tnwh")
 Speed = 100
+KillReward = 10
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

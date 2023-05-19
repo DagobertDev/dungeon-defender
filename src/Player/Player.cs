@@ -6,6 +6,9 @@ namespace DungeonDefender.Player;
 public partial class Player : Node
 {
 	[Export]
+	private GoldComponent _gold;
+
+	[Export]
 	private HealthComponent _health;
 
 	[Export]
@@ -13,10 +16,17 @@ public partial class Player : Node
 
 	public override void _Ready()
 	{
-		Require.NotNull(_lane);
+		Require.NotNull(_gold);
 		Require.NotNull(_health);
-		_lane.EnemyReachedEnd += OnEnemyCollision;
+		Require.NotNull(_lane);
 		_health.ZeroHealthReached += GameOver;
+		_lane.EnemyReachedEnd += OnEnemyCollision;
+		MessageBus.EnemyDeath += OnEnemyDeath;
+	}
+
+	public override void _ExitTree()
+	{
+		MessageBus.EnemyDeath -= OnEnemyDeath;
 	}
 
 	public void OnEnemyCollision(Enemy enemy)
@@ -28,5 +38,10 @@ public partial class Player : Node
 	private void GameOver()
 	{
 		GetTree().Paused = true;
+	}
+
+	private void OnEnemyDeath(Enemy enemy)
+	{
+		_gold.CurrentGold += enemy.KillReward;
 	}
 }

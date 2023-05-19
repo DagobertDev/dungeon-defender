@@ -26,8 +26,9 @@ color = Color(0, 0.623529, 0, 1)
 texture = ExtResource("1_ausab")
 polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 
-[node name="Player" type="Node" parent="." node_paths=PackedStringArray("_health", "_lane")]
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("_gold", "_health", "_lane")]
 script = ExtResource("2_qhyf7")
+_gold = NodePath("Gold")
 _health = NodePath("Health")
 _lane = NodePath("../Lane")
 
