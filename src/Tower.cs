@@ -1,5 +1,6 @@
 using System.Linq;
 using DungeonDefender.Enemies;
+using DungeonDefender.Projectiles;
 using Godot;
 
 namespace DungeonDefender;

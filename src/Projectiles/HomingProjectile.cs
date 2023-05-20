@@ -1,9 +1,9 @@
 ﻿using DungeonDefender.Enemies;
 using Godot;
 
-namespace DungeonDefender;
+namespace DungeonDefender.Projectiles;
 
-public partial class Projectile : Node2D, IProjectile
+public partial class HomingProjectile : Node2D, IProjectile
 {
 	private int _damage;
 	private Enemy _target;

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://fgsi3j5sb4ts"]
+
+[ext_resource type="Script" path="res://Projectiles/HomingProjectile.cs" id="1_emod3"]
+[ext_resource type="Texture2D" uid="uid://bh73yl32sm4sy" path="res://assets/weapon_arrow.png" id="2_ge0dx"]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_emod3")
+Speed = 300
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ge0dx")

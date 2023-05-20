@@ -1,6 +1,6 @@
 ﻿using DungeonDefender.Enemies;
 
-namespace DungeonDefender;
+namespace DungeonDefender.Projectiles;
 
 public interface IProjectile
 {
