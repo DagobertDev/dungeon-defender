@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://o7aw6p6nrb1r"]
+[gd_scene load_steps=17 format=3 uid="uid://o7aw6p6nrb1r"]
 
 [ext_resource type="Texture2D" uid="uid://b8ko7snlmhyu1" path="res://assets/grass.png" id="1_ausab"]
 [ext_resource type="Script" path="res://Player/Player.cs" id="2_qhyf7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://PlaceTowerButton.cs" id="10_00upp"]
 [ext_resource type="PackedScene" uid="uid://cod1nbqry7u4e" path="res://tower.tscn" id="11_mms0e"]
 [ext_resource type="Script" path="res://InGameMenu.cs" id="12_1q77d"]
+[ext_resource type="PackedScene" uid="uid://b4o52qmy4dks7" path="res://arrow-tower.tscn" id="13_6icnp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ood13"]
 radius = 50.0
@@ -105,6 +106,15 @@ offset_top = -20.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="ArrowTowerButton" type="Button" parent="Buildings" node_paths=PackedStringArray("TowerBuilder", "GoldComponent")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Arrow Tower"
+script = ExtResource("10_00upp")
+Tower = ExtResource("13_6icnp")
+TowerBuilder = NodePath("../../TowerBuilder")
+GoldComponent = NodePath("../../Player/Gold")
 
 [node name="TowerButton" type="Button" parent="Buildings" node_paths=PackedStringArray("TowerBuilder", "GoldComponent")]
 custom_minimum_size = Vector2(100, 100)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://610c3utu6v1u" path="res://assets/green_character.png" id="1_bphdy"]
 [ext_resource type="Script" path="res://Tower.cs" id="2_e2bt6"]
-[ext_resource type="PackedScene" uid="uid://fgsi3j5sb4ts" path="res://Projectiles/homing-projectile.tscn" id="3_bfbte"]
+[ext_resource type="PackedScene" uid="uid://fgsi3j5sb4ts" path="res://Projectiles/homing-projectile.tscn" id="3_o71me"]
 [ext_resource type="Texture2D" uid="uid://cnru6qyxmo7s7" path="res://assets/green_hand.png" id="4_qjgco"]
 [ext_resource type="Texture2D" uid="uid://nkuivyx66e1h" path="res://assets/weapon_bow_arrow.png" id="5_22bnv"]
 
@@ -16,7 +16,7 @@ Damage = 1
 Range = 300
 ReloadTime = 1
 Cost = 100
-Projectile = ExtResource("3_bfbte")
+Projectile = ExtResource("3_o71me")
 CollisionBody = NodePath("Area")
 
 [node name="Area" type="Area2D" parent="."]

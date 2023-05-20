@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4o52qmy4dks7"]
+
+[ext_resource type="Texture2D" uid="uid://610c3utu6v1u" path="res://assets/green_character.png" id="1_mi4ht"]
+[ext_resource type="Script" path="res://Tower.cs" id="2_hijj0"]
+[ext_resource type="PackedScene" uid="uid://ktp14cpafy00" path="res://Projectiles/arrow.tscn" id="3_gh7u3"]
+[ext_resource type="Texture2D" uid="uid://nkuivyx66e1h" path="res://assets/weapon_bow_arrow.png" id="4_ssbpr"]
+[ext_resource type="Texture2D" uid="uid://cnru6qyxmo7s7" path="res://assets/green_hand.png" id="5_a08tv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_isw4h"]
+radius = 50.0
+
+[node name="Tower" type="Sprite2D" node_paths=PackedStringArray("CollisionBody")]
+texture = ExtResource("1_mi4ht")
+script = ExtResource("2_hijj0")
+Damage = 1
+Range = 400
+ReloadTime = 1
+Cost = 100
+Projectile = ExtResource("3_gh7u3")
+CollisionBody = NodePath("Area")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_isw4h")
+
+[node name="Bow" type="Sprite2D" parent="."]
+position = Vector2(58, 2)
+rotation = 1.5708
+texture = ExtResource("4_ssbpr")
+
+[node name="LeftHand" type="Sprite2D" parent="."]
+position = Vector2(23, 20)
+texture = ExtResource("5_a08tv")
+
+[node name="RightHand" type="Sprite2D" parent="."]
+position = Vector2(60, -20)
+texture = ExtResource("5_a08tv")
