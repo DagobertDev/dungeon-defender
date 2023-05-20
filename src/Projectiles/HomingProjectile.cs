@@ -5,6 +5,9 @@ namespace DungeonDefender.Projectiles;
 
 public partial class HomingProjectile : Node2D, IProjectile
 {
+	[Export]
+	private Area2D _area;
+
 	private int _damage;
 	private Enemy _target;
 
@@ -24,19 +27,27 @@ public partial class HomingProjectile : Node2D, IProjectile
 	{
 		Require.MoreThanZero(Speed);
 		Require.NotNull(_target);
+		Require.NotNull(_area);
+		_area.AreaEntered += OnCollision;
 	}
 
 	public override void _Process(double delta)
 	{
 		GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, Speed * (float)delta);
+		Rotation = GlobalPosition.AngleToPoint(_target.GlobalPosition);
+	}
 
-		if (GlobalPosition.DistanceSquaredTo(_target.GlobalPosition) > 10)
+	private void OnCollision(Area2D area)
+	{
+		if (area.GetParent() == _target)
 		{
-			Rotation = GlobalPosition.AngleToPoint(_target.GlobalPosition);
-			return;
+			OnEnemyHit(_target);
 		}
+	}
 
-		_target.Health.ApplyDamage(_damage);
+	private void OnEnemyHit(Enemy enemy)
+	{
+		enemy.Health.ApplyDamage(_damage);
 		QueueFree();
 	}
 
