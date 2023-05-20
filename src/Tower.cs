@@ -62,10 +62,8 @@ public partial class Tower : Sprite2D
 	private void FireAt(Enemy enemy)
 	{
 		Rotation = GlobalPosition.AngleToPoint(enemy.GlobalPosition);
-		var projectile = Projectile.Instantiate<Projectile>();
-		projectile.GlobalPosition = GlobalPosition;
-		projectile.FireAt(enemy, Damage);
-		GetParent().AddChild(projectile);
+		var projectile = Projectile.Instantiate<IProjectile>();
+		projectile.FireAt(this, enemy);
 		_reloadTimer.Start(ReloadTime);
 		Disable();
 	}

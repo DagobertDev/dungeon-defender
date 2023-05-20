@@ -3,13 +3,22 @@ using Godot;
 
 namespace DungeonDefender;
 
-public partial class Projectile : Node2D
+public partial class Projectile : Node2D, IProjectile
 {
 	private int _damage;
 	private Enemy _target;
 
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int Speed { get; private set; }
+
+	public void FireAt(Tower tower, Enemy target)
+	{
+		_target = target;
+		_damage = tower.Damage;
+		Position = tower.Position;
+		_target.TreeExiting += OnTargetLost;
+		tower.GetParent().AddChild(this);
+	}
 
 	public override void _Ready()
 	{
@@ -29,13 +38,6 @@ public partial class Projectile : Node2D
 
 		_target.Health.ApplyDamage(_damage);
 		QueueFree();
-	}
-
-	public void FireAt(Enemy target, int damage)
-	{
-		_target = target;
-		_damage = damage;
-		_target.TreeExiting += OnTargetLost;
 	}
 
 	private void OnTargetLost()
