@@ -29,10 +29,10 @@ public partial class Player : Node
 		MessageBus.EnemyDeath -= OnEnemyDeath;
 	}
 
-	public void OnEnemyCollision(Enemy enemy)
+	public void OnEnemyCollision(IEnemy enemy)
 	{
 		_health.ApplyDamage(1);
-		enemy.QueueFree();
+		enemy.Destroy();
 	}
 
 	private void GameOver()
@@ -40,7 +40,7 @@ public partial class Player : Node
 		GetTree().Paused = true;
 	}
 
-	private void OnEnemyDeath(Enemy enemy)
+	private void OnEnemyDeath(IEnemy enemy)
 	{
 		_gold.CurrentGold += enemy.KillReward;
 	}

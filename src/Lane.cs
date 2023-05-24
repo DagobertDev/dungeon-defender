@@ -1,3 +1,4 @@
+using System;
 using DungeonDefender.Enemies;
 using Godot;
 
@@ -5,9 +6,6 @@ namespace DungeonDefender;
 
 public partial class Lane : Line2D
 {
-	[Signal]
-	public delegate void EnemyReachedEndEventHandler(Enemy enemy);
-
 	[Export]
 	public Path2D Path { get; private set; }
 
@@ -16,6 +14,8 @@ public partial class Lane : Line2D
 
 	[Export]
 	public Area2D Area { get; private set; }
+
+	public event Action<IEnemy> EnemyReachedEnd;
 
 	public override void _Ready()
 	{
@@ -45,16 +45,18 @@ public partial class Lane : Line2D
 		EndArea.Position = lastPoint;
 	}
 
-	public void AddEnemy(Enemy enemy)
+	public void AddEnemy(Node enemy)
 	{
 		Path.AddChild(enemy);
 	}
 
 	public void OnObjectReachedEnd(Area2D obj)
 	{
-		if (obj.GetParent() is Enemy enemy)
+		var node = obj.GetParent();
+
+		if (node is IEnemy enemy)
 		{
-			EmitSignal(SignalName.EnemyReachedEnd, enemy);
+			EnemyReachedEnd?.Invoke(enemy);
 		}
 	}
 }

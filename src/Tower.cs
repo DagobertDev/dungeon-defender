@@ -42,7 +42,7 @@ public partial class Tower : Sprite2D
 
 	public override void _Process(double delta)
 	{
-		var enemy = GetTree().GetNodesInGroup(Groups.Enemy).Cast<Enemy>().FirstOrDefault(IsInRange);
+		var enemy = GetTree().GetNodesInGroup(Groups.Enemy).Cast<IEnemy>().FirstOrDefault(IsInRange);
 
 		if (enemy is not null)
 		{
@@ -60,17 +60,17 @@ public partial class Tower : Sprite2D
 		SetProcess(false);
 	}
 
-	private void FireAt(Enemy enemy)
+	private void FireAt(IEnemy enemy)
 	{
-		Rotation = GlobalPosition.AngleToPoint(enemy.GlobalPosition);
+		Rotation = GlobalPosition.AngleToPoint(enemy.Position);
 		var projectile = Projectile.Instantiate<IProjectile>();
 		projectile.FireAt(this, enemy);
 		_reloadTimer.Start(ReloadTime);
 		Disable();
 	}
 
-	private bool IsInRange(Enemy enemy)
+	private bool IsInRange(IEnemy enemy)
 	{
-		return enemy.GlobalPosition.DistanceSquaredTo(GlobalPosition) < Range * Range;
+		return enemy.Position.DistanceSquaredTo(Position) < Range * Range;
 	}
 }

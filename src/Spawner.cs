@@ -1,3 +1,4 @@
+using System;
 using DungeonDefender.Enemies;
 using Godot;
 
@@ -19,7 +20,13 @@ public partial class Spawner : Node
 
 	public void SpawnEnemy()
 	{
-		var enemy = Enemy.Instantiate<Enemy>();
+		var enemy = Enemy.Instantiate();
+
+		if (enemy is not IEnemy)
+		{
+			throw new InvalidOperationException($"Node {enemy.GetType()} is not a valid enemy.");
+		}
+
 		Lane.AddEnemy(enemy);
 	}
 }

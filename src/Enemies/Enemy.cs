@@ -1,8 +1,9 @@
+using System;
 using Godot;
 
 namespace DungeonDefender.Enemies;
 
-public partial class Enemy : PathFollow2D
+public partial class Enemy : PathFollow2D, IEnemy
 {
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int Speed { get; private set; }
@@ -11,6 +12,14 @@ public partial class Enemy : PathFollow2D
 	public int KillReward { get; private set; }
 
 	public HealthComponent Health { get; private set; }
+
+	public void Destroy()
+	{
+		Destroyed?.Invoke();
+		QueueFree();
+	}
+
+	public event Action Destroyed;
 
 	public override void _Ready()
 	{
@@ -28,6 +37,6 @@ public partial class Enemy : PathFollow2D
 	private void OnDeath()
 	{
 		MessageBus.OnEnemyDeath(this);
-		QueueFree();
+		Destroy();
 	}
 }

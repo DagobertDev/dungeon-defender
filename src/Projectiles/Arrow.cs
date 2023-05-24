@@ -14,7 +14,7 @@ public partial class Arrow : Node2D, IProjectile
 	[Export(PropertyHint.Range, "0, 1000, or_greater")]
 	public int Speed { get; private set; }
 
-	public void FireAt(Tower tower, Enemy target)
+	public void FireAt(Tower tower, IEnemy target)
 	{
 		_targetPosition = target.Position;
 		_damage = tower.Damage;
@@ -43,13 +43,13 @@ public partial class Arrow : Node2D, IProjectile
 
 	private void OnCollision(Area2D area)
 	{
-		if (area.GetParent() is Enemy enemy)
+		if (area.GetParent() is IEnemy enemy)
 		{
 			OnEnemyHit(enemy);
 		}
 	}
 
-	private void OnEnemyHit(Enemy enemy)
+	private void OnEnemyHit(IEnemy enemy)
 	{
 		enemy.Health.ApplyDamage(_damage);
 		QueueFree();
