@@ -1,4 +1,5 @@
 ﻿using System;
+using DungeonDefender.Components;
 using Godot;
 
 namespace DungeonDefender.Enemies;
@@ -6,7 +7,7 @@ namespace DungeonDefender.Enemies;
 public interface IEnemy
 {
 	int KillReward { get; }
-	HealthComponent Health { get; }
+	IHealth Health { get; }
 	Vector2 Position { get; }
 	event Action Destroyed;
 	void Destroy();

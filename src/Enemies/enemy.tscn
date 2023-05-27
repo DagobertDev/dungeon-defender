@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_0tnwh"]
 [ext_resource type="Texture2D" uid="uid://bb41quv2vt7ay" path="res://assets/red_character.png" id="2_1hyvj"]
-[ext_resource type="Script" path="res://HealthComponent.cs" id="3_w8i3i"]
+[ext_resource type="Script" path="res://Components/HealthComponent.cs" id="3_mekjr"]
 [ext_resource type="Script" path="res://HPBar.cs" id="4_gc2u5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy2q"]
 size = Vector2(42, 43)
 
-[node name="Enemy" type="PathFollow2D"]
+[node name="Enemy" type="PathFollow2D" node_paths=PackedStringArray("_health")]
 rotates = false
 loop = false
 script = ExtResource("1_0tnwh")
+_health = NodePath("Health")
 Speed = 100
 KillReward = 10
 
@@ -20,10 +21,10 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_1hyvj")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("3_w8i3i")
+script = ExtResource("3_mekjr")
 MaximumHealth = 10
 
-[node name="HPBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
+[node name="HPBar" type="ProgressBar" parent="." node_paths=PackedStringArray("_healthComponent")]
 self_modulate = Color(1, 0, 0, 1)
 offset_left = -20.0
 offset_top = 23.0
@@ -32,7 +33,7 @@ offset_bottom = 35.0
 value = 100.0
 show_percentage = false
 script = ExtResource("4_gc2u5")
-HealthComponent = NodePath("../Health")
+_healthComponent = NodePath("../Health")
 
 [node name="Area" type="Area2D" parent="."]
 
