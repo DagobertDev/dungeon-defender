@@ -10,17 +10,19 @@ public partial class Player : Node
 	private GoldComponent _gold;
 
 	[Export]
-	private HealthComponent _health;
+	private HealthWrapper _healthWrapper;
 
 	[Export]
 	private Lane _lane;
 
+	private IHealth Health => _healthWrapper.Value;
+
 	public override void _Ready()
 	{
 		Require.NotNull(_gold);
-		Require.NotNull(_health);
+		Require.NotNull(_healthWrapper);
 		Require.NotNull(_lane);
-		_health.ZeroHealthReached += GameOver;
+		Health.ZeroHealthReached += GameOver;
 		_lane.EnemyReachedEnd += OnEnemyCollision;
 		MessageBus.EnemyDeath += OnEnemyDeath;
 	}
@@ -32,7 +34,7 @@ public partial class Player : Node
 
 	public void OnEnemyCollision(IEnemy enemy)
 	{
-		_health.ApplyDamage(1);
+		Health.ApplyDamage(1);
 		enemy.Destroy();
 	}
 

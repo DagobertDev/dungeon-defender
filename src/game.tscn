@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://Player/Player.cs" id="2_qhyf7"]
 [ext_resource type="Script" path="res://HPBar.cs" id="3_n7ku1"]
 [ext_resource type="Script" path="res://Player/GoldLabel.cs" id="3_swgtg"]
+[ext_resource type="Script" path="res://Components/HealthWrapper.cs" id="5_6y60q"]
 [ext_resource type="Script" path="res://Player/GoldComponent.cs" id="5_jdwrf"]
 [ext_resource type="PackedScene" uid="uid://c04ewee4t58mh" path="res://lane.tscn" id="5_pjj03"]
-[ext_resource type="Script" path="res://Components/HealthComponent.cs" id="5_slflf"]
 [ext_resource type="Texture2D" uid="uid://hbo2ir5p07rd" path="res://assets/path.png" id="6_yt838"]
 [ext_resource type="Script" path="res://Spawner.cs" id="7_xwqo3"]
 [ext_resource type="PackedScene" uid="uid://h4lofx30td8k" path="res://Enemies/enemy.tscn" id="8_rfgsp"]
@@ -27,11 +27,19 @@ color = Color(0, 0.623529, 0, 1)
 texture = ExtResource("1_ausab")
 polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 
-[node name="Player" type="Node" parent="." node_paths=PackedStringArray("_gold", "_health", "_lane")]
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("_gold", "_healthWrapper", "_lane")]
 script = ExtResource("2_qhyf7")
 _gold = NodePath("Gold")
-_health = NodePath("Health")
+_healthWrapper = NodePath("Health")
 _lane = NodePath("../Lane")
+
+[node name="Health" type="Node" parent="Player"]
+script = ExtResource("5_6y60q")
+_maximumHealth = 10
+
+[node name="Gold" type="Node" parent="Player"]
+script = ExtResource("5_jdwrf")
+InitialGold = 1000
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Player"]
 anchors_preset = 1
@@ -47,22 +55,14 @@ text = "Gold: 00000"
 script = ExtResource("3_swgtg")
 GoldComponent = NodePath("../../Gold")
 
-[node name="HPBar" type="ProgressBar" parent="Player/HBoxContainer" node_paths=PackedStringArray("_healthComponent")]
+[node name="HPBar" type="ProgressBar" parent="Player/HBoxContainer" node_paths=PackedStringArray("_healthWrapper")]
 self_modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
 show_percentage = false
 script = ExtResource("3_n7ku1")
-_healthComponent = NodePath("../../Health")
-
-[node name="Health" type="Node" parent="Player"]
-script = ExtResource("5_slflf")
-MaximumHealth = 10
-
-[node name="Gold" type="Node" parent="Player"]
-script = ExtResource("5_jdwrf")
-InitialGold = 1000
+_healthWrapper = NodePath("../../Health")
 
 [node name="Lane" parent="." instance=ExtResource("5_pjj03")]
 texture_repeat = 2

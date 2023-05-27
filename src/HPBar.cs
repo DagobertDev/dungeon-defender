@@ -6,13 +6,15 @@ namespace DungeonDefender;
 public partial class HPBar : ProgressBar
 {
 	[Export]
-	private HealthComponent _healthComponent;
+	private HealthWrapper _healthWrapper;
 
 	public override void _Ready()
 	{
-		Require.NotNull(_healthComponent);
-		MaxValue = _healthComponent.MaximumHealth;
-		_healthComponent.CurrentHealthChanged += OnCurrentHealthChanged;
+		Require.NotNull(_healthWrapper);
+		var health = _healthWrapper.Value;
+		MaxValue = health.MaximumHealth;
+		health.CurrentHealthChanged += OnCurrentHealthChanged;
+		Value = health.CurrentHealth;
 	}
 
 	private void OnCurrentHealthChanged(int health)
